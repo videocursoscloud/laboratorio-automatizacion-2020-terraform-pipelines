@@ -8,16 +8,14 @@ phases:
       # name: version
       # name: version
     commands:
-      - ./prepare_agent.sh
+      - ./prepare_amazonlinux.sh
       # - command
-  pre_build:
-    commands:
-      - terraform init
-#      - bash -c "cd vpc ; terraform plan"
-      # - command
+#  pre_build:
+#    commands:
+#      - ./packer validate bastion.json
   build:
     commands:
-      - terraform apply --auto-approve -no-color
+      - ./packer build -machine-readable -color=false bastion.json
   #post_build:
     #commands:
       # - command

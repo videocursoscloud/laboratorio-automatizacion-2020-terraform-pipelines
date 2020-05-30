@@ -12,8 +12,8 @@ phases:
       # - command
   pre_build:
     commands:
-      - bash -c "cd vpc ; terraform init -no-color"
-      - bash -c "cd vpc ; terraform plan -no-color"
+      - terraform init -no-color
+      - terraform plan -no-color
       # - command
 #  build:
 #    commands:

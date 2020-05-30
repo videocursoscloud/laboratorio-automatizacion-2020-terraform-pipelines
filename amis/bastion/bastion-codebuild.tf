@@ -1,9 +1,9 @@
-resource "aws_codebuild_project" "vpc-codebuild-plan" {
-  name           = "vpc-codebuild-plan"
-  description    = "vpc-codebuild-plan"
+resource "aws_codebuild_project" "bastion-codebuild-validate" {
+  name           = "bastion-codebuild-validate"
+  description    = "bastion-codebuild-validate"
   build_timeout  = "5"
   queued_timeout = "5"
-  service_role   = aws_iam_role.vpc-codebuild-role.arn
+  service_role   = aws_iam_role.bastion-codebuild-role.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
@@ -23,9 +23,9 @@ resource "aws_codebuild_project" "vpc-codebuild-plan" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/videocursoscloud/laboratorio-automatizacion-2020-terraform-vpc"
+    location        = "https://github.com/videocursoscloud/vpc-cuarentena-packer"
     git_clone_depth = 1
-    buildspec       = file("vpc-buildspec-plan.yaml")
+    buildspec       = file("bastion-buildspec-validate.yaml")
 
   }
 
@@ -40,12 +40,13 @@ resource "aws_codebuild_project" "vpc-codebuild-plan" {
 
 
 
-resource "aws_codebuild_project" "vpc-codebuild-apply" {
-  name           = "vpc-codebuild-apply"
-  description    = "vpc-codebuild-apply"
+
+resource "aws_codebuild_project" "bastion-codebuild-build" {
+  name           = "bastion-codebuild-build"
+  description    = "bastion-codebuild-build"
   build_timeout  = "5"
   queued_timeout = "5"
-  service_role   = aws_iam_role.vpc-codebuild-role.arn
+  service_role   = aws_iam_role.bastion-codebuild-role.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
@@ -65,9 +66,9 @@ resource "aws_codebuild_project" "vpc-codebuild-apply" {
 
   source {
     type            = "GITHUB"
-    location        = "https://github.com/videocursoscloud/laboratorio-automatizacion-2020-terraform-vpc"
+    location        = "https://github.com/videocursoscloud/vpc-cuarentena-packer"
     git_clone_depth = 1
-    buildspec       = file("vpc-buildspec-apply.yaml")
+    buildspec       = file("bastion-buildspec-build.yaml")
 
   }
 
